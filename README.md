@@ -28,4 +28,4 @@ Here are concepts new to me that I attempted to implement:
   - Add meta description for SEO
   - The rendering pipeline, Cumulative Layout Shift (CLS): 4 things a browser can animate cheaply are position, scale, rotation, and opacity. In my page, I am animating length changes of my boxes and so I will cause a Cumulative Layout Shift. What this suggests is that instead of animating a length change to display additional information, I should perhaps create a modal/popup to display additional information that doesn't cause a CLS.
 
-  All in all, I learned a lot from this project, especially with Lighthouse. I did a Lighthouse on another page that I created (I knew it was terrible), and scored at 25! It's good to see what's wrong and how to fix it for the future. I'll aspire to make things more efficient.
+All in all, I learned a lot from this project, especially with Lighthouse. I did a Lighthouse on another page that I created (I knew it was terrible), and scored at 25! It's good to see what's wrong and how to fix it for the future. I'll aspire to make things more efficient.
