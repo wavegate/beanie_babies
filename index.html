@@ -5,9 +5,132 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Beanie Babies listings">
     <title>Beanie Babies</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans">
+    <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="style.css"></noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans"></noscript>
+    <style type="text/css">
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            /* This is the typical CSS reset. */
+        }
+
+        /* box-height: height of one item */
+        /* margin: how much of the next and previous item you can see when centered on an item */
+        /* n: number of items in addition to initial 3 (total items = 3 + n) */
+        :root {
+            --box-height: 320px;
+            --margin: 70px;
+            --n: 5;
+        }
+
+        body {
+            font-family: sans-serif, "Open Sans";
+            font-display: swap;
+            color: #2e1013;
+        }
+
+        h1 {
+            font-family: serif, Merriweather;
+            font-display: swap;
+        }
+
+        /* I wanted to add a gradient to add a slight 3D feel, but I came across an issue where if my gradient was covering my :hover properties, I wouldn't be able to activate them due to the z-index. */
+        .gradient-top {
+            height: 20vh;
+            width: 100vw;
+            z-index: 1;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: linear-gradient(black, 50%, transparent);
+        }
+
+        .gradient-bottom {
+            height: 20vh;
+            width: 100vw;
+            z-index: 1;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(transparent, 50%, black);
+        }
+
+        /* The big container contains the entire body of the page, and organizes the individual items via flexbox. I calculated the padding and total height of the document by induction on base n = 3. This allows me to adjust the height of the document properly just by changing the variable n if I decide to add or remove items. */
+        .big-container {
+            background: #593347;
+            padding-top: calc((100vh - var(--box-height)) / 2);
+            padding-bottom: calc((100vh - var(--box-height)) / 2);
+            height: calc(200vh + var(--box-height) - 2 * var(--margin) + (100vh + var(--box-height) - 2 * var(--margin)) * var(--n) / 2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Each main div represents one Beanie Baby. */
+        .main {
+            height: 80vw;
+            width: 80vw;
+            max-width: var(--box-height);
+            max-height: var(--box-height);
+            background-color: #f1d3e3;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: space-around;
+            box-shadow: 10px 10px 30px #2e1013;
+        }
+
+        .name {
+            height: 0;
+            padding: 0px 10px;
+            text-align: center;
+            opacity: 0;
+        }
+
+
+        .main img {
+            max-width: min(var(--box-height), 100%);
+            height: auto;
+        }
+
+        /* Adding borders to two sides of a box and rotating allow us to create up and down arrows. */
+        .arrow {
+            border: solid #f5f5f5;
+            border-width: 0 10px 10px 0;
+            height: 60px;
+            width: 60px;
+            position: fixed;
+            left: 50%;
+        }
+
+
+        .up {
+            top: 5%;
+            transform: translate(-50%, 0) rotate(-135deg);
+            animation-name: up;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+        }
+
+        .down {
+            bottom: 5%;
+            transform: translate(-50%, 0) rotate(45deg);
+            animation-name: down;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+        }
+    </style>
+
 </head>
 
 <body>
